@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# This script
+prog=${0##*/}
+
+# Get the first character of the process name
+first_char="${1:0:1}"
+
+# Get the remaining characters of the process name
+remaining_chars="${1:1}"
+
+# Construct the search pattern
+search_pattern="[$first_char]$remaining_chars"
+
+# Run the ps command with the search pattern
+ps e | grep -i "$search_pattern" | grep -v grep | grep -v "${prog}"|awk '{print $1}'
